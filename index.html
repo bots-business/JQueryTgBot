@@ -1,0 +1,62 @@
+<html>
+  <head>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous"></script>
+      <script src="tgauth.js"></script>
+  </head>
+
+  <body>
+    <h1>Demo for JQuery Telegram Auth</h1>
+
+    <style type="text/css">
+      #tgAuthLink{
+        display: block;
+      }
+      .tgAuthInfo{
+        font-size:25px;
+      }
+
+    </style>
+
+    <div id="tgauthContainer">
+      <form id="tgSignUpFrm">
+        <input type="submit" value="Sign Up with Telegram">
+      </form>
+
+      <div id="tgWait" style="display:none">
+        <img src="icons/tgspinner.svg" style="float:left">
+        <div class="tgAuthInfo">
+          <span>Wait you...</span>
+          <a id="tgAuthLink" target="_blank">Sign up with bot</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="result">
+    </div>
+
+  </body>
+
+
+
+  <script type="text/javascript">
+
+    // вызывает метод init
+    $().tgAuth({
+      /* botId: 68, /* ID for yours own bot in Bots.business */
+      bot_params: { hello_msg: "Authorized 😀",
+                    somebody_already_autorized_msg: "Somebody has already entered. Not you?"
+                  },
+      onAuthorize: function(user){
+        alert("Authorized"); /* alert for page focus */
+
+        /* add any signIn code here */
+        $("#result").text("Hello, " + user.first_name + ' ' + user.last_name +
+          '! Your telegram ID: ' + user.telegramid);
+      }
+    });
+
+  </script>
+
+</html>
